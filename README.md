@@ -1,29 +1,42 @@
-# Frontend Mentor - QR code component solution
+# Frontend Mentor - Blog preview card solution
 
-This is a solution to the [QR code component challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/qr-code-component-iux_sIO_H).
+This is a solution to the [Blog preview card challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/blog-preview-card-ckPaj01IcS). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
 
 ## Table of contents
+
 - [Overview](#overview)
   - [Screenshot](#screenshot)
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
+- [Author](#author)
 
 ## Overview
+
 ### Screenshot
+
 ![](./screenshot.jpg)
 
 ### Links
-- Solution URL: https://www.frontendmentor.io/solutions/qr-code-component---html-and-css-z6rLRBzbhW
-- Live Site URL: https://gleeful-babka-2be68d.netlify.app/
+
+- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
 
 ## My process
+
 ### Built with
+
 - Semantic HTML5 markup
 - CSS custom properties
 - Flexbox
 - Mobile-first workflow
 
 ### What I learned
-I learned how to use Flexbox to center a component perfectly on the screen, and how to use `box-sizing: border-box` to manage padding without breaking the layout.
+
+During this project, I practiced my CSS layout skills, particularly using Flexbox to center the entire card on the screen. I also learned how to create a solid, non-blurred drop shadow using `box-shadow` to match the card's design.
+
+```css
+.card {
+  box-shadow: 8px 8px 0px 0px hsl(0, 0%, 7%);
+}
