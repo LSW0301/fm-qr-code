@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>社交链接</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #141414;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* 盒子组 */
+    .max_card {
+
+      width: 384px;
+      background-color: #1e1e1e;
+      border-radius: 10px;
+
+      padding: 40px
+    }
+
+    /* 照片组 */
+    .black_woman {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      margin-top: 42px;
+      margin-left: 102px;
+    }
+
+    /* 文本组 */
+    .name {
+      margin-left: 65px;
+      margin-top: 154px;
+      margin-top: 18px;
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .location {
+      color: #b9e530;
+      font-size: 14px;
+      font-weight: 700;
+      margin-left: 70px;
+      margin-top: 8px
+    }
+
+    .description {
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 400;
+      margin-top: 25px;
+      margin-left: 25px;
+      white-space: nowrap;
+    }
+
+    /* 表单组 */
+    .form {
+      margin-top: 25px;
+    }
+
+    .form button:hover {
+      background-color: #c4f82a;
+      color: #141414;
+      cursor: pointer;
+    }
+
+    .form button {
+      width: 100%;
+      height: 45px;
+      color: #ffffff;
+      background-color: #323232;
+      border-radius: 6px;
+      border: none;
+      font-size: 14px;
+      font-weight: 700;
+      margin-top: 16px;
+
+    }
+  </style>
+</head>
+
+<body>
+  <div class="max_card">
+    <img src="./image/黑姐妹头像.jpeg" alt="" class="black_woman">
+    <p class="name">Jessica Randall</p>
+    <p class="location">London, United Kingdom</p>
+    <p class="description">“Frontend developer and avid reader.”</p>
+    <!-- 表单 -->
+    <div class="form">
+      <a href="https://github.com/JessicaRandall" target="_blank"><button class="github" type="submit">
+          GitHub</button></a>
+      <a href="https://www.frontendmentor.io/profile/JessicaRandall" target="_blank"><button class="FM" type="submit">
+          Frontend Mentor</button></a>
+      <a href="https://www.linkedin.com/in/jessica-randall-2b2b2b22/" target="_blank"><button class="linkedin"
+          type="submit"> LinkedIn</button></a>
+      <a href="https://twitter.com/JessicaRandall" target="_blank"><button class="twitter" type="submit">
+          Twitter</button></a>
+      <a href="https://www.instagram.com/jessica_randall/" target="_blank"><button class="instagram" type="submit">
+          Instagram</button></a>
+    </div>
+
+
+
+  </div>
+</body>
+
+</html>
