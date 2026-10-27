@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Young+Serif&display=swap"
+    rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>菜谱</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #f3e4d8;
+
+    }
+
+    /* 盒子组 */
+    .main_box {
+      width: 736px;
+
+      margin: 0 auto;
+      border-radius: 24px;
+      padding: 40px;
+      background-color: #ffffff;
+      margin-top: 150px;
+      margin-bottom: 150px;
+    }
+
+    .main_box img {
+      width: 100%;
+      height: 330px;
+      border-radius: 13px;
+    }
+
+    .preparation_time {
+      margin-top: 28px;
+      min-height: 190px;
+      background-color: #fff7fb;
+      border-radius: 10px;
+      padding: 24px;
+    }
+
+    .ingredients {
+      margin-top: 24px;
+    }
+
+    .ingredients_list {
+      padding-left: 22px;
+      margin-top: 24px;
+    }
+
+    .instructions {
+      margin-top: 30px;
+    }
+
+    .nutritions {
+      margin-top: 30px;
+    }
+
+
+
+    /* 文本组 */
+    .title {
+      font-family: "Young Serif", sans-serif;
+      font-size: 40px;
+      margin-top: 42px;
+    }
+
+    .description {
+      margin-top: 24px;
+      font-size: 16px;
+      color: #5f564d;
+      font-family: "Outfit", sans-serif;
+    }
+
+    .preparation_time_title {
+      font-size: 20px;
+      font-family: 无衬线粗体;
+      color: #7b284f;
+      margin-bottom: 16px;
+      font-size: 20px;
+      font-weight: 700;
+      padding-left: 5px;
+    }
+
+    .preparation_time_list {
+      padding-left: 30px;
+      color: #5f564d;
+      font-family: "Outfit", sans-serif;
+    }
+
+    .ingredients_title {
+      font-family: "Young Serif", sans-serif;
+      font-size: 27px;
+      color: #854632;
+    }
+
+    .preparation_time_list li {
+      padding-left: 25px;
+      padding-bottom: 20px;
+      font-family: "Outfit", sans-serif;
+    }
+
+    .ingredients_list li {
+      padding-bottom: 20px;
+      padding-left: 25px;
+      color: #5f564d;
+      font-family: "Outfit", sans-serif;
+    }
+
+    .instructions_title {
+      font-family: "Young Serif", sans-serif;
+      font-size: 27px;
+      color: #854632;
+      margin-bottom: 24px;
+    }
+
+    .instructions ol li {
+      line-height: 22px;
+      padding-bottom: 12px;
+      font-family: "Outfit", sans-serif;
+
+    }
+
+    .instructions ol li {
+      padding-left: 25px;
+    }
+
+    .instructions ol {
+      padding-left: 25px;
+
+    }
+
+    .nutritions_title {
+      font-family: "Young Serif", sans-serif;
+      font-size: 27px;
+      color: #854632;
+      margin-bottom: 24px;
+
+    }
+
+    .nutritions_description {
+      font-size: 16px;
+      color: #5f564d;
+      font-family: "Outfit", sans-serif;
+    }
+
+
+
+    /* 图片组 */
+    .tata {
+      width: 656px;
+      height: 330px;
+      margin-top: 15px;
+      border-radius: 13px;
+      margin-bottom: 24px;
+    }
+
+    /* 线组 */
+    .ingredients_hr {
+      margin-top: 24px;
+    }
+
+    .instructions_hr {
+      margin-top: 24px;
+    }
+
+
+    .nutrition_table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-family: "Outfit", sans-serif;
+      font-size: 16px;
+    }
+
+    .nutrition_table td {
+
+      padding: 16px 0;
+      border-bottom: 1px solid #e4ded8;
+    }
+
+
+    .nutrition_table tr:last-child td {
+      border-bottom: none;
+    }
+
+
+    .nutrition_table td:first-child {
+      width: 51.4%;
+      padding-left: 32px;
+      color: #5f564d;
+    }
+
+
+    .nutrition_table td:last-child {
+      color: #854632;
+      font-weight: 700;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main_box">
+    <img src="./image/好吃的塔塔.jpeg" alt="" class="tata">
+    <p class="title">Simple Omelette Recipe</p>
+    <p class="description">An easy and quick dish, perfect for any meal. This classic omelette combines beaten eggs
+      cooked to perfection,
+      optionally filled with your choice of cheese, vegetables, or meats.</p>
+    <div class="preparation_time">
+      <p class="preparation_time_title">Preparation time</p>
+      <ul class="preparation_time_list">
+        <li> <strong>Total:</strong> Approximately 10 minutes</li>
+        <li> <strong>Preparation:</strong> 5 minutes</li>
+        <li> <strong>Cooking:</strong> 5 minutes</li>
+      </ul>
+    </div>
+
+    <!-- 配料组 -->
+    <div class="ingredients">
+      <p class="ingredients_title">Ingredients</p>
+      <ul class="ingredients_list">
+        <li>2-3 large eggs</li>
+        <li>Salt, to taste</li>
+        <li>pepper, to taste</li>
+        <li>1 tablespoon of butter or oil</li>
+        <li>Optional fillings: cheese, diced vegetables, cooked meats, herbs</li>
+      </ul>
+      <hr class="ingredients_hr">
+    </div>
+
+    <!-- 操作组 -->
+    <div class="instructions">
+      <p class="instructions_title">Instructions</p>
+      <ol>
+        <li><strong>Beat the eggs: </strong>In a bowl, beat the eggs with a pinch of salt and pepper until they are well
+          mixed. You can
+          add a tablespoon of water or milk for a fluffier texture.</li>
+        <li><strong>Heat the pan: </strong>Place a non-stick frying pan over medium heat and add butter or oil.</li>
+        <li><strong> Cook the omelette: </strong> Once the butter is melted and bubbling, pour in the eggs. Tilt the pan
+          to ensure the eggs
+          evenly coat the surface.</li>
+        <li><strong> Fold and serve: </strong> As the omelette continues to cook, carefully lift one edge and fold it
+          over the fillings.
+          Let it cook for another minute, then slide it onto a plate.</li>
+        <li><strong> Enjoy: </strong> Serve hot, with additional salt and pepper if needed.</li>
+      </ol>
+    </div>
+    <hr class="instructions_hr">
+
+
+    <!-- 营养组 -->
+    <div class="nutritions">
+      <p class="nutritions_title">Nutrition</p>
+      <p class="nutritions_description">The table below shows nutritional values per serving without the additional
+        fillings.</p>
+
+      <!-- 营养表 -->
+      <table class="nutrition_table">
+        <tr>
+          <td>Calories</td>
+          <td>277kcal</td>
+        </tr>
+        <tr>
+          <td>Carbs</td>
+          <td>0g</td>
+        </tr>
+        <tr>
+          <td>Protein</td>
+          <td>20g</td>
+        </tr>
+        <tr>
+          <td>Fat</td>
+          <td>22g</td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+</body>
+
+</html>
