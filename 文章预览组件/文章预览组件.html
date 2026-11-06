@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文本介绍组件</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: #ecf2f8;
+  }
+
+  /* 盒子组 */
+  .main_box {
+    width: 730px;
+    height: 280px;
+    margin: 0 auto;
+    margin-top: 300px;
+    background-color: #fff;
+    border-radius: 10px;
+    position: relative;
+    /* 【新增】为了方便定位气泡 */
+  }
+
+  /* 主内容盒子 */
+  .content_box {
+    padding: 10px;
+  }
+
+  /* 图片组 */
+  .left_pic {
+    float: left;
+    width: 285px;
+    height: 100%;
+    background-color: #ecf2f8;
+    border-radius: 10px 0 0 10px;
+  }
+
+  .avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-left: 40px;
+    margin-top: 30px;
+  }
+
+  /* 文本组 */
+  .title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #48556a;
+    margin-top: 24px;
+    line-height: 1.4;
+    margin-left: 315px;
+  }
+
+  .name {
+    margin-left: 370px;
+    margin-top: -50px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #48556a;
+  }
+
+  .time {
+    margin-left: 370px;
+    margin-top: 0px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #9eafc2;
+  }
+
+  .content {
+    font-size: 13px;
+    font-weight: 500;
+    color: #6d7f97;
+    margin-top: 15px;
+    line-height: 1.5;
+    margin-left: 315px;
+  }
+
+  /* 分享按钮 */
+  .share {
+    display: block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #ecf2f8;
+    border: none;
+    margin-left: 640px;
+    margin-top: -33px;
+    color: #6E8098;
+    cursor: pointer;
+    transition: all 0.3s;
+    /* 【新增】平滑过渡 */
+  }
+
+  .share:hover {
+    cursor: pointer;
+  }
+
+  /* 气泡框 */
+  .bubble_box {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background-color: #48556a;
+    width: 248px;
+    padding: 16px 32px;
+    border-radius: 10px;
+    margin-left: 540px;
+    margin-top: -120px;
+
+    /* 默认隐藏与过渡动画 */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 10;
+  }
+
+  /* 气泡框底部的小三角 */
+  .bubble_box::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px 10px 0;
+    border-style: solid;
+    border-color: #48556a transparent transparent transparent;
+  }
+
+  /* 文字样式 */
+  .bubble_box span {
+    color: #9eafc2;
+    font-size: 13px;
+    letter-spacing: 5px;
+  }
+
+  /* 气泡显示 */
+  .main_box.active .bubble_box {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* 按钮反色 */
+  .main_box.active .share {
+    background-color: #48556a;
+    color: #fff;
+  }
+</style>
+
+<body>
+  <!-- 最大的盒子 -->
+  <div class="main_box">
+    <!-- 左侧大图片 -->
+    <img class="left_pic" src="./image/文章预览组件/桌子.jpg" alt="">
+
+    <!-- 主内容盒子 -->
+    <div class="content_box">
+      <!-- 大标题 -->
+      <div class="title">Shift the overall look and feel by<br>adding these wonderful touches to<br>furniture in your
+        home
+      </div>
+
+      <!-- 内容 -->
+      <div class="content">
+        Ever been in a room and felt like something was missing? Perhaps it felt slightly bare and uninviting. I’ve
+        got some simple tips to help you make any room feel complete.
+      </div>
+
+      <!-- 头像 -->
+      <div>
+        <img class="avatar" src="./image/文章预览组件/头像.jpg" alt="">
+      </div>
+
+      <!--名字和时间信息  -->
+      <div>
+        <p class="name">Michelle Appleton</p>
+        <p class="time">28 Jun 2020</p>
+      </div>
+
+      <!-- 分享按钮 -->
+      <div>
+        <button class="share" id="share_btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="13">
+            <path fill="currentColor"
+              d="M15 6.495L8.766.014V3.88H7.441C3.33 3.88 0 7.039 0 10.936v2.049l.589-.612C2.59 10.294 5.422 9.11 8.39 9.11h.375v3.867L15 6.495z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- 气泡框 -->
+    <div class="bubble_box">
+
+      <span>SHARE</span>
+      <!-- 里面的三张软件图片 -->
+      <img class="software_img" src="./image/文章预览组件/icon-facebook.svg" alt="">
+      <img class="software_img" src="./image/文章预览组件/icon-twitter.svg" alt="">
+      <img class="software_img" src="./image/文章预览组件/icon-pinterest.svg" alt="">
+    </div>
+  </div>
+
+  <script>
+    // 获取最大盒子和分享按钮
+    const mainBox = document.querySelector('.main_box');
+    const shareBtn = document.getElementById('share_btn');
+
+    // 点击按钮，切换显示状态
+    shareBtn.addEventListener('click', function (event) {
+      mainBox.classList.toggle('active');
+      // 阻止事件冒泡
+      event.stopPropagation();
+    });
+
+    // 点击网页空白处，关闭气泡框
+    document.addEventListener('click', function (event) {
+      if (mainBox.classList.contains('active') && !mainBox.contains(event.target)) {
+        mainBox.classList.remove('active');
+      }
+    });
+  </script>
+</body>
+
+</html>
