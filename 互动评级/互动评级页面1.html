@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>互动评级页面1</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: #131518;
+
+  }
+
+  /* 盒子组 */
+  .big_box {
+    background: linear-gradient(180deg, #212832, #181e27);
+    width: 412px;
+    padding: 32px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 300px;
+    border-radius: 15px;
+
+  }
+
+  .star_box {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #262f38;
+
+  }
+
+  /* 星星 */
+  .star_box img {
+    width: 17px;
+    height: 17px;
+    margin-left: 17px;
+    margin-top: 17px;
+  }
+
+  /* 文本 */
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    margin-top: 24px;
+  }
+
+  .text {
+    font-size: 14px;
+    color: #959eac;
+    margin-top: 12px;
+    line-height: 22px;
+  }
+
+  /* 5个圆圈按钮 */
+  .circle_box {
+    margin-top: 24px;
+  }
+
+  /* 圆圈按钮 */
+  .circle {
+    margin: 0 12px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: #262f38;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+  }
+
+  /* 提交按钮 */
+  .submit {
+    width: 100%;
+    height: 45px;
+    border-radius: 20px;
+    background-color: #fc7614;
+    border: none;
+    color: #000000;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 24px;
+    letter-spacing: 2px
+  }
+
+  /* 伪元素 */
+  .submit:hover {
+    background-color: #fff;
+    color: #000000;
+    border: 1px solid #000000;
+    cursor: pointer;
+  }
+
+  .submit:active {
+    background-color: #fc7614;
+    color: #fff;
+  }
+
+  .circle:hover {
+    background-color: #fff;
+    color: #000000;
+    cursor: pointer;
+  }
+
+  .circle.active {
+    background-color: #fc7614;
+    color: #fff;
+  }
+</style>
+
+<body>
+  <div class="big_box">
+    <!-- 放左上角星星的盒子 -->
+    <div class="star_box">
+      <img src="./image/star.svg" alt="">
+
+    </div>
+    <!-- 标题 -->
+    <p class="title">How did we do?</p>
+    <!-- 文本 -->
+    <p class="text">Please let us know how we did with your support request. All feedback is appreciated to help us
+      improve our offering!</p>
+    <!-- 5个圆圈按钮 -->
+    <div class="circle_box">
+      <button class="circle" type="radio" name="rating1">1</button>
+      <button class="circle" type="radio" name="rating2">2</button>
+      <button class="circle" type="radio" name="rating3">3</button>
+      <button class="circle" type="radio" name="rating4">4</button>
+      <button class="circle" type="radio" name="rating5">5</button>
+    </div>
+    <!-- 提交按钮 -->
+    <button class="submit" type="submit">Submit</button>
+  </div>
+
+  <script>
+    const circles = document.querySelectorAll(".circle");
+
+    // 记录按下的那个按钮的评级（账本）
+    let rating = null;
+
+    // 遍历所有的圆圈按钮
+    circles.forEach(function (circle) {
+      circle.addEventListener("click", function () {
+        // 去除所有人的 active 类名去掉
+        circles.forEach(function (c) {
+          c.classList.remove("active");
+        });
+
+        // 被点击的这个加上 active 类名
+        circle.classList.add("active");
+
+        // 把当前被点击按钮里的数字，记到rating
+        rating = circle.innerText;
+      });
+    });
+
+    //点击提交按钮
+    document.querySelector(".submit").addEventListener("click", function () {
+      // 检查是否选择了评级
+      if (rating === null) {
+        // 账本是空的，说明没点过
+        alert("rating is null");
+      }
+      else {
+        // 先把分数存进本地浏览器
+        localStorage.setItem("userScore", rating);
+
+        // 然后再跳转
+        window.location.href = "互动评级页面2.html";
+
+      }
+    });
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>互动评级页面2</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: #131518;
+  }
+
+
+  /* 盒子组 */
+  .big_box {
+    background: linear-gradient(180deg, #212832, #181e27);
+    width: 412px;
+    padding: 32px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 300px;
+    border-radius: 15px;
+  }
+
+  .rating_box {
+    margin-top: 30px;
+    margin-left: 80px;
+    border-radius: 16px;
+    background-color: #262f38;
+    height: 32px;
+    width: 180px;
+    padding: 5px 17px;
+    color: #fc7614;
+    font-size: 14px;
+
+  }
+
+  .thank_box {
+    margin-top: 24px;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  /* 图片组 */
+  .picture {
+    width: 144px;
+    height: 108px;
+    margin-left: 85px;
+    margin-bottom: 16px;
+    margin-top: 20px;
+  }
+
+  /* 文本组 */
+  .text {
+    text-align: center;
+    color: #959eac;
+    font-size: 14px;
+    margin-top: 24px;
+    line-height: 1.6;
+  }
+</style>
+
+
+
+<body>
+  <!-- 主卡片 -->
+  <div class="big_box">
+    <div class="picture">
+      <img src="./image/感谢你的喜欢！（手机）.svg" alt="">
+    </div>
+    <!-- 显示打分 -->
+    <div class="rating_box">
+      <p class="rating">You selected <span id="score-text">X</span> out of 5</p>
+    </div>
+
+    <!-- 感谢语 -->
+    <div class="thank_box">
+      <p class="thank">Thank you!</p>
+    </div>
+    <!-- 文本 -->
+    <p class="text">We appreciate you taking the time to give a rating. <br> If you ever need more support, don't
+      hesitate to <br>
+      get in touch!</p>
+
+
+  </div>
+
+
+
+
+
+  <script>
+
+    // 从本地口袋里把分数拿出来
+    const finalScore = localStorage.getItem("userScore");
+
+    // 抓取那个包着 X 的 span 标签
+    const scoreText = document.querySelector("#score-text");
+
+    //换掉 X
+    if (finalScore !== null) {
+      scoreText.innerText = finalScore;
+    }
+    else {
+      scoreText.innerText = "0";
+    }
+  </script>
+</body>
+
+</html>
