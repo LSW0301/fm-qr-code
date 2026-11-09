@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>通讯报名表</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  /* 盒子组 */
+  body {
+    background-color: #36384d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+  }
+
+  .card {
+    display: flex;
+    background-color: #fff;
+    border-radius: 30px;
+    width: 900px;
+    height: 600px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    padding-left: 50px;
+    position: relative;
+    /* 加个相对定位，让里面的绝对定位更稳 */
+  }
+
+  .left {
+    width: 50%;
+    height: 100%;
+  }
+
+  .right {
+    width: 50%;
+    height: 100%;
+  }
+
+  .list {
+    margin-top: 260px;
+    margin-left: -3px;
+  }
+
+  .email {
+    margin-top: 40px;
+    margin-left: 0px;
+    position: relative;
+  }
+
+  /* 文本组 */
+  .title {
+    position: absolute;
+    font-size: 54px;
+    font-weight: bold;
+    color: #36384d;
+    margin-top: 90px;
+  }
+
+  .text {
+    position: absolute;
+    font-size: 16px;
+    font-weight: 400;
+    color: #36384d;
+    margin-top: 190px;
+    line-height: 1.5;
+  }
+
+  .error {
+    position: absolute;
+    display: none;
+    /* 默认隐藏 */
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.5;
+    color: #ff6257;
+    margin-top: -25px;
+    /* 微调位置，保证在标签右侧 */
+    right: 40px;
+    /* 用 right 定位更稳，因为 input 是 90% 宽 */
+  }
+
+  /* 图片组 */
+  .img {
+    height: 92%;
+    margin-left: 34px;
+    margin-top: 22px;
+  }
+
+  .check {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+
+  /* 列表项 */
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  ul li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #36384d;
+    gap: 6px;
+  }
+
+  /* 表单组 */
+  .email p {
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.5;
+    color: #36384d;
+    margin-bottom: 10px;
+  }
+
+  .email input {
+    width: 90%;
+    height: 56px;
+    padding-left: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    /* 去掉点击时的默认黑框 */
+  }
+
+  /* 【新增】输入框的错误状态样式 */
+  .email input.error-input {
+    background-color: #ffe8e6;
+    border: 1px solid #ff6257;
+    color: #ff6257;
+  }
+
+  /* 【新增】输入框错误时，placeholder 的颜色也变红 */
+  .email input.error-input::placeholder {
+    color: #ff6257;
+  }
+
+  .submit {
+    width: 90%;
+    height: 56px;
+    background-color: #242742;
+    color: #fff;
+    border: none;
+    font-weight: 700;
+    border-radius: 8px;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+  }
+
+  /* 伪类 */
+  .submit:hover {
+    background: linear-gradient(to right, hsl(4, 100%, 67%), hsl(18, 100%, 64%));
+    cursor: pointer;
+    box-shadow: 0 15px 25px rgba(255, 98, 87, 0.5);
+  }
+</style>
+
+<body>
+  <!-- 主卡片 -->
+  <div class="card">
+
+    <!-- 左边50%区域 -->
+    <div class="left">
+      <!-- 大标题 -->
+      <p class="title">Stay updated!</p>
+      <!--小文本 -->
+      <p class="text">Join 60,000+ product managers receiving monthly<br>updates on:</p>
+      <!-- 列表项 -->
+      <div class="list">
+        <ul>
+          <li>
+            <img class="check" src="./image/通讯报名表/粗勾.svg" alt="">
+            Product discovery and building what matters
+          </li>
+          <li>
+            <img class="check" src="./image/通讯报名表/粗勾.svg" alt="">
+            Measuring to ensure updates are a success
+          </li>
+          <li>
+            <img class="check" src="./image/通讯报名表/粗勾.svg" alt="">
+            And much more!
+          </li>
+        </ul>
+
+        <!-- 填写地址与提交按钮 -->
+        <div class="email">
+          <p>Email address</p>
+          <span class="error" id="errorMsg">Valid email required</span>
+          <!-- 注意：这里给 input 加个 id，方便 JS 抓取，顿号已删 -->
+          <input type="text" id="emailInput" placeholder="email@company.com">
+        </div>
+        <!-- 提交按钮 -->
+        <button class="submit" type="submit" id="submitBtn">Subscribe to monthly newsletter</button>
+
+      </div>
+    </div>
+
+    <!-- 右边50%区域 -->
+    <div class="right">
+      <!-- 图片 -->
+      <img class="img" src="./image/通讯报名表/竖着的desktop.svg" alt="">
+    </div>
+  </div>
+
+  <script>
+    // 获取元素
+    const submitBtn = document.getElementById('submitBtn');
+    const emailInput = document.getElementById('emailInput');
+    const errorMsg = document.getElementById('errorMsg');
+
+    // 核心验证函数（点击按钮和回车都调它）
+    function handleSubmit() {
+      const emailValue = emailInput.value.trim();
+      // 标准邮箱正则表达式
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (emailValue === '' || !emailRegex.test(emailValue)) {
+        // 错误状态：加 class，显示提示
+        emailInput.classList.add('error-input');
+        errorMsg.style.display = 'block';
+      } else {
+        // 正确状态：移除 class，隐藏提示，并跳转
+        emailInput.classList.remove('error-input');
+        errorMsg.style.display = 'none';
+        window.location.href = '通讯报名表2.html';
+      }
+    }
+
+    // 监听提交按钮点击
+    submitBtn.addEventListener('click', function (e) {
+      e.preventDefault(); // 防止默认刷新
+      handleSubmit();
+    });
+
+    // 监听回车键（提升用户体验）
+    emailInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        handleSubmit();
+      }
+    });
+  </script>
+</body>
+
+</html>
