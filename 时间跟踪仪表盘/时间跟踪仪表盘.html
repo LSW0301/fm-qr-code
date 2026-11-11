@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>时间跟踪仪表盘</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Rubik', sans-serif;
+  }
+
+  body {
+    background-color: #0f1424;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+  }
+
+  .big-card {
+    display: grid;
+    grid-template-columns: repeat(4, 225px);
+    grid-template-rows: repeat(2, 250px);
+    gap: 24px;
+  }
+
+  .left-card {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+    width: 100%;
+    background-color: #1c204b;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .left-upper {
+    height: 70%;
+    background-color: #5847eb;
+    padding: 35px;
+    border-radius: 15px 15px 0 0;
+  }
+
+  .left-lower {
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 35px;
+    background-color: #1c204b;
+  }
+
+  /* 6个盒子基础框架 */
+  .box1,
+  .box2,
+  .box3,
+  .box4,
+  .box5,
+  .box6 {
+    height: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    /* 把刚才的 clip-path 删了，换回最稳妥的 overflow: hidden */
+  }
+
+  .image1,
+  .image2,
+  .image3,
+  .image4,
+  .image5,
+  .image6 {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: -10px;
+    right: 10px;
+    opacity: 0.4;
+  }
+
+  .box1 {
+    background-color: #ff8c66;
+  }
+
+  .box2 {
+    background-color: #56c2e6;
+  }
+
+  .box3 {
+    background-color: #ff5c7c;
+  }
+
+  .box4 {
+    background-color: #4acf81;
+  }
+
+  .box5 {
+    background-color: #7536d3;
+  }
+
+  .box6 {
+    background-color: #f1c65b;
+  }
+
+  /* 你写的下方内容盒子 */
+  .lower-content {
+    position: absolute;
+    /* 【终极修复】：强行往下探出 2px，父元素的 overflow 会把它切平，完美掩盖锯齿缝隙！ */
+    bottom: -2px;
+    width: 100%;
+    height: calc(100% - 45px + 2px);
+    /* 高度相应加 2px */
+
+    background-color: #1c204b;
+
+    /* 【修复】：只给上面圆角，下面直角被父元素裁 */
+    border-radius: 15px 15px 15px 15px;
+
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: background-color 0.3s;
+    box-sizing: border-box;
+    /* 确保加了 padding 也不会撑破 */
+  }
+
+  .lower-content:hover {
+    background-color: #2b3068;
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .card-header span:last-child {
+    color: #bdc1ff;
+    letter-spacing: 2px;
+    font-weight: 700;
+  }
+
+  .lower-text {
+    font-size: 56px;
+    font-weight: 300;
+    color: #fff;
+    margin-top: 10px;
+  }
+
+  .lower-last {
+    font-size: 15px;
+    color: #bdc1ff;
+  }
+
+  .avatar-img {
+    height: 78px;
+    width: 78px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    margin-bottom: 40px;
+    display: block;
+  }
+
+  .report-for {
+    display: block;
+    font-size: 15px;
+    font-weight: 400;
+    color: #bdc1ff;
+    margin-bottom: 5px;
+  }
+
+  .name-text {
+    font-size: 40px;
+    font-weight: 300;
+    color: #fff;
+    line-height: 1.2;
+  }
+
+  .time-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .time-button1,
+  .time-button2,
+  .time-button3 {
+    background-color: transparent;
+    border: none;
+    color: #7078c9;
+    font-size: 18px;
+    font-weight: 400;
+    text-align: left;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.3s;
+  }
+
+  .time-button1:hover,
+  .time-button2:hover,
+  .time-button3:hover,
+  .time-button1.active,
+  .time-button2.active,
+  .time-button3.active {
+    color: #fff;
+  }
+</style>
+
+<body>
+  <div class="big-card">
+    <div class="left-card">
+      <div class="left-upper">
+        <div class="avatar">
+          <img class="avatar-img" src="./image/时间跟踪仪表盘/黑哥们头像.png" alt="">
+        </div>
+        <div class="name">
+          <span class="report-for">Report for</span>
+          <p class="name-text">Jeremy Robson</p>
+        </div>
+      </div>
+
+      <div class="left-lower">
+        <div class="time-buttons">
+          <button class="time-button1 time-btn" type="button">Daily</button>
+          <button class="time-button2 time-btn active" type="button">Weekly</button>
+          <button class="time-button3 time-btn" type="button">Monthly</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="box1">
+      <div class="image1"><img src="./image/时间跟踪仪表盘/公文包.svg" alt=""></div>
+      <div class="lower-content">
+        <div class="card-header"><span class="title-text">Work</span><span>...</span></div>
+        <p class="lower-text">123</p>
+        <p class="lower-last">Last Week - 36hrs</p>
+      </div>
+    </div>
+
+    <div class="box2">
+      <div class="image2"><img src="./image/时间跟踪仪表盘/手柄.svg" alt=""></div>
+      <div class="lower-content">
+        <div class="card-header"><span class="title-text">Play</span><span>...</span></div>
+        <p class="lower-text">10hrs</p>
+        <p class="lower-last">Last Week - 8hrs</p>
+      </div>
+    </div>
+
+    <div class="box3">
+      <div class="image3"><img src="./image/时间跟踪仪表盘/书.svg" alt=""></div>
+      <div class="lower-content">
+        <div class="card-header"><span class="title-text">Study</span><span>...</span></div>
+        <p class="lower-text">4hrs</p>
+        <p class="lower-last">Last Week - 7hrs</p>
+      </div>
+    </div>
+
+    <div class="box4">
+      <div class="image4"><img src="./image/时间跟踪仪表盘/人在跑.svg" alt=""></div>
+      <div class="lower-content">
+        <div class="card-header"><span class="title-text">Exercise</span><span>...</span></div>
+        <p class="lower-text">4hrs</p>
+        <p class="lower-last">Last Week - 5hrs</p>
+      </div>
+    </div>
+
+    <div class="box5">
+      <div class="image5"><img src="./image/时间跟踪仪表盘/对话气泡.svg" alt=""></div>
+      <div class="lower-content">
+        <div class="card-header"><span class="title-text">Social</span><span>...</span></div>
+        <p class="lower-text">5hrs</p>
+        <p class="lower-last">Last Week - 10hrs</p>
+      </div>
+    </div>
+
+    <div class="box6">
+      <div class="image6"><img src="./image/时间跟踪仪表盘/爱心.svg" alt=""></div>
+      <div class="lower-content">
+        <div class="card-header"><span class="title-text">Self Care</span><span>...</span></div>
+        <p class="lower-text">2hrs</p>
+        <p class="lower-last">Last Week - 2hrs</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const data = {
+      daily: [
+        { current: '5hrs', previous: 'Last Day - 7hrs' },
+        { current: '1hr', previous: 'Last Day - 2hrs' },
+        { current: '0hrs', previous: 'Last Day - 1hr' },
+        { current: '1hr', previous: 'Last Day - 1hr' },
+        { current: '3hrs', previous: 'Last Day - 2hrs' },
+        { current: '0hrs', previous: 'Last Day - 0hrs' }
+      ],
+      weekly: [
+        { current: '32hrs', previous: 'Last Week - 36hrs' },
+        { current: '10hrs', previous: 'Last Week - 8hrs' },
+        { current: '4hrs', previous: 'Last Week - 7hrs' },
+        { current: '4hrs', previous: 'Last Week - 5hrs' },
+        { current: '5hrs', previous: 'Last Week - 10hrs' },
+        { current: '2hrs', previous: 'Last Week - 2hrs' }
+      ],
+      monthly: [
+        { current: '103hrs', previous: 'Last Month - 128hrs' },
+        { current: '23hrs', previous: 'Last Month - 29hrs' },
+        { current: '13hrs', previous: 'Last Month - 19hrs' },
+        { current: '11hrs', previous: 'Last Month - 18hrs' },
+        { current: '21hrs', previous: 'Last Month - 23hrs' },
+        { current: '7hrs', previous: 'Last Month - 11hrs' }
+      ]
+    };
+
+    const timeBtns = document.querySelectorAll('.time-btn');
+    const lowerContents = document.querySelectorAll('.lower-content');
+
+    function renderData(timeframe) {
+      lowerContents.forEach((box, index) => {
+        const currentEl = box.querySelector('.lower-text');
+        const previousEl = box.querySelector('.lower-last');
+        currentEl.innerText = data[timeframe][index].current;
+        previousEl.innerText = data[timeframe][index].previous;
+      });
+    }
+
+    timeBtns.forEach(btn => {
+      btn.addEventListener('click', function () {
+        timeBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+
+        if (this.classList.contains('time-button1')) {
+          renderData('daily');
+        } else if (this.classList.contains('time-button2')) {
+          renderData('weekly');
+        } else if (this.classList.contains('time-button3')) {
+          renderData('monthly');
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
