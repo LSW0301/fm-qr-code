@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grid登录界面</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* 全局样式 */
+    body {
+      display: flex;
+      flex-direction: column;
+      background-color: #2C5BFF;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* 头部样式 */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 10%;
+      background-color: #2C5BFF;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding-left: 4%;
+      padding-right: 4%;
+      z-index: 105;
+      /* 调高层级，稳稳盖在上面 */
+      position: relative;
+    }
+
+    .header-left-text {
+      display: flex;
+      align-items: center;
+      color: #fff;
+    }
+
+    .header-left-text li {
+      list-style: disc;
+      margin-left: 10px;
+    }
+
+    .header-right-menu {
+      margin-left: auto;
+      display: block;
+    }
+
+    .header-right-close {
+      margin-left: auto;
+      display: none;
+    }
+
+    .header-right-menu:hover,
+    .header-right-close:hover {
+      cursor: pointer;
+    }
+
+    /* 主体部分样式 */
+    .main {
+      flex: 1;
+      height: 80%;
+      display: flex;
+      position: relative;
+    }
+
+    .left-box {
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+      width: 42%;
+      height: 80%;
+      display: flex;
+      flex-direction: column;
+      padding-left: 5%;
+      padding-top: 13%;
+    }
+
+    .title {
+      font-size: 60px;
+      line-height: 1.1;
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .content {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #fff;
+      font-weight: 500;
+      margin-top: 50px;
+    }
+
+    .right-box {
+      width: 58%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+    }
+
+    .box1,
+    .box2,
+    .box3,
+    .box4 {
+      padding: 8%;
+      position: relative;
+      transition: all 0.1s ease-in-out;
+    }
+
+    .box1:hover,
+    .box2:hover,
+    .box3:hover,
+    .box4:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      cursor: pointer;
+    }
+
+    .box1 {
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .box2 {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .box3 {
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .data {
+      font-size: 32px;
+      color: #fff;
+      font-weight: 500;
+      position: absolute;
+      left: 75%;
+      top: 8%;
+    }
+
+    .data-desc {
+      color: #fff;
+      position: absolute;
+      top: 70%;
+    }
+
+    .icon {
+      width: 30px;
+      height: 30px;
+      position: absolute;
+    }
+
+    /* 底部样式 */
+    .footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      height: 10%;
+      background-color: #2C5BFF;
+      padding-left: 4%;
+      padding-right: 4%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      /* 这里什么都不要加，它就会乖乖待在下面被遮罩盖住 */
+    }
+
+    .footer p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #fff;
+      font-weight: 500;
+    }
+
+    /* 遮罩层 */
+    #mask {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 20, 0.5);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease-in-out;
+      z-index: 100;
+    }
+
+    #mask.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* 右侧导航栏 */
+    .nav-bar {
+      position: fixed;
+      top: 10%;
+      /* 重点修改1：从 header 下方开始滑出，不遮挡 header 边框线 */
+      right: 0;
+      width: 500px;
+      height: 90%;
+      /* 重点修改2：高度改为剩下的 90% */
+      background-color: #2C5BFF;
+
+      /* 核心：平时藏在屏幕右侧外面 */
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out;
+      z-index: 102;
+
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      padding-right: 40px;
+      padding-top: 80px;
+    }
+
+    .nav-bar.active {
+      transform: translateX(0);
+    }
+
+    .nav-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: right;
+    }
+
+    .nav-list li {
+      color: #fff;
+      font-size: 32px;
+      font-weight: 500;
+      margin-bottom: 20px;
+      cursor: pointer;
+      transition: opacity 0.3s;
+      text-underline-offset: 8px;
+      /* 统一设置下划线距离 */
+    }
+
+    .nav-list li:hover {
+      opacity: 0.7;
+    }
+
+    /* 重点修改3：只有点击激活的 li 才有下划线 */
+    .nav-list li.active {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <ul class="header-left-text">
+      <li>
+        <p>Bridge Collective</p>
+      </li>
+    </ul>
+    <form action="">
+      <img class="header-right-menu" src="./image/Grid登录界面/icon-menu.svg" alt="menu">
+      <img class="header-right-close" src="./image/Grid登录界面/icon-close.svg" alt="close">
+    </form>
+  </header>
+
+  <div class="main">
+    <div class="left-box">
+      <p class="title">A classroom <br> for every child.</p>
+      <p class="content">We fund the schools, train the teachers, and<br>measure what works — so every child we
+        reach<br>today becomes a graduate tomorrow.</p>
+    </div>
+
+    <div class="right-box">
+      <div class="box1">
+        <img class="icon" src="./image/Grid登录界面/icon-sparkle.svg" alt="">
+        <p class="data">2.4M</p>
+        <p class="data-desc"><strong>Students reached</strong><br>Across 31 countries since 2011.</p>
+      </div>
+      <div class="box2">
+        <img class="icon" src="./image/Grid登录界面/icon-plus.svg" alt="">
+        <p class="data">1,284</p>
+        <p class="data-desc"><strong>Schools partnered</strong><br>In 14 countries, from Kenya to Guatemala.</p>
+      </div>
+      <div class="box3">
+        <img class="icon" src="./image/Grid登录界面/icon-arrow-right.svg" alt="">
+        <p class="data">38K</p>
+        <p class="data-desc"><strong>Teachers trained</strong><br>Equipped with modern tools and methodology.</p>
+      </div>
+      <div class="box4">
+        <img class="icon" src="./image/Grid登录界面/icon-trending-up.svg" alt="">
+        <p class="data">3.1x</p>
+        <p class="data-desc"><strong>Graduation lift</strong><br>Partner schools outperform national averages 3x.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>© 2026 Bridge Collective</p>
+    <p>Registered charity 12345678</p>
+  </footer>
+
+  <aside class="nav-bar">
+    <ul class="nav-list">
+      <li class="active">About</li> <!-- 默认激活 About -->
+      <li>Our Work</li>
+      <li>Partners</li>
+      <li>Annual Report</li>
+      <li>Donate</li>
+    </ul>
+  </aside>
+
+  <div id="mask"></div>
+
+  <script>
+    const close = document.querySelector('.header-right-close');
+    const menu = document.querySelector('.header-right-menu');
+    const mask = document.querySelector('#mask');
+    const navBar = document.querySelector('.nav-bar');
+    const navListItems = document.querySelectorAll('.nav-list li'); // 获取所有 li
+
+    //  menu 点击事件
+    menu.addEventListener('click', function () {
+      menu.style.display = 'none';
+      close.style.display = 'block';
+      mask.classList.add('active');
+      navBar.classList.add('active');
+    })
+
+    //  close 点击事件
+    close.addEventListener('click', function () {
+      menu.style.display = 'block';
+      close.style.display = 'none';
+      mask.classList.remove('active');
+      navBar.classList.remove('active');
+    })
+
+    // 点击黑色的遮罩层，也能关掉导航栏！
+    mask.addEventListener('click', function () {
+      menu.style.display = 'block';
+      close.style.display = 'none';
+      mask.classList.remove('active');
+      navBar.classList.remove('active');
+    });
+
+    // 重点修改4：处理 li 的点击事件，实现点击谁，谁才有下划线
+    navListItems.forEach(item => {
+      item.addEventListener('click', function () {
+        // 先排他：把所有 li 的 active 类名去掉
+        navListItems.forEach(li => li.classList.remove('active'));
+        // 再给自己加上
+        this.classList.add('active');
+      });
+    });
+  </script>
+</body>
+
+</html>
